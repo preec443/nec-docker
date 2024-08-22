@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  free5gc-compose:
+    build:
+      context: .
+      dockerfile: DockerFile5G
+    ports:
+      - "3000:3000"
+      - "5000:5000"
+      - "8000:8000"
+    volumes:
+      - ./free5gc-compose:/free5gc-compose
+    command: ["docker-compose", "up"]
+
+  gtp5g-service:
+    build:
+      context: .
+      dockerfile: DockerFile
+    privileged: true
+    network_mode: "host"
+    command: ["/bin/bash"]
+
+  mongodb:
+    image: mongo:4.4
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+
+volumes:
+  mongodb_data:

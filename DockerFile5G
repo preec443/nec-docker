@@ -1,0 +1,16 @@
+FROM ubuntu:20.04
+
+# Step 1: Clone the free5gc-compose repository
+RUN git clone --branch v3.4.1 https://github.com/free5gc/free5gc-compose.git /free5gc-compose
+
+# Step 2: Set the working directory
+WORKDIR /free5gc-compose
+
+# Step 3: Build and run free5gc-compose
+RUN docker-compose build
+
+# Step 4: Expose ports (as needed)
+EXPOSE 3000 5000 8000
+
+# Step 9: Define the entry point
+CMD ["docker-compose", "up"]
