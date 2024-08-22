@@ -4,7 +4,7 @@ services:
   free5gc-compose:
     build:
       context: .
-      dockerfile: DockerFile5G
+      dockerfile: Dockerfile5G
     ports:
       - "3000:3000"
       - "5000:5000"
@@ -16,7 +16,7 @@ services:
   gtp5g-service:
     build:
       context: .
-      dockerfile: DockerFile
+      dockerfile: Dockerfile
     privileged: true
     network_mode: "host"
     command: ["/bin/bash"]
